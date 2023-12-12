@@ -5,7 +5,7 @@ import '../Items.css'
 import Select from "../../ui/form/Select.jsx";
 
 const Analytics = () => {
-  const [analytics, setAnalytics] = useState([]);
+  const [analytics, setAnalytics] = useState([]); //
 
   const [project, setProject] = useState(0);
   const [projects, setProjects] = useState([]);
