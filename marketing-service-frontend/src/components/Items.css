@@ -1,0 +1,20 @@
+.item {
+    display: grid;
+    gap: 0.25rem;
+    grid-template-columns: 10fr 1fr 1fr;
+    align-items: center;
+    text-align: left;
+    justify-content: space-between;
+    background-color: #e2e8f0;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.25rem 0.25rem 1rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    width: fit-content;
+    margin: 0 auto;
+}

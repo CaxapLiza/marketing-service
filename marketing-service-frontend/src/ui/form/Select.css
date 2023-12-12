@@ -1,0 +1,15 @@
+select {
+    height: fit-content;
+    border-bottom: 1px solid #e2e8f0;
+    border-left: 1px solid #e2e8f0;
+    border-top: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    margin-bottom: -1px;
+    margin-right: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    color: #4299E1;
+    font-weight: bold;
+    outline: none;
+    width: 100%;
+    border-radius: 0.375rem;
+}

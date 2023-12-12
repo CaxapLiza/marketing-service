@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+  analytic:
+    build:
+      context: ./marketing-service-backend/services/analytic
+      dockerfile: Dockerfile
+    ports:
+      - "8087:8080"
+
+  client:
+    build:
+      context: ./marketing-service-backend/services/client
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+
+  contract:
+    build:
+      context: ./marketing-service-backend/services/contract
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+
+  contract_service:
+    build:
+      context: ./marketing-service-backend/services/contract_service
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8080"
+
+  project:
+    build:
+      context: ./marketing-service-backend/services/project
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8080"
+
+  resource:
+    build:
+      context: ./marketing-service-backend/services/resource
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8080"
+
+  service:
+    build:
+      context: ./marketing-service-backend/services/service
+      dockerfile: Dockerfile
+    ports:
+      - "8086:8080"
+
+  frontend:
+    build:
+      context: ./marketing-service-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
