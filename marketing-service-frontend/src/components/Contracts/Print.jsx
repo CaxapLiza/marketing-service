@@ -19,7 +19,6 @@ const Print = () => {
   const [startDate, setStartDate] = useState(getDate());
   const [endDate, setEndDate] = useState(getDate());
   const [price, setPrice] = useState(0);
-  const [text, setText] = useState("");
   const [client, setClient] = useState(null);
   const [services, setServices] = useState([]);
   const [allServices, setAllServices] = useState([]);
@@ -31,7 +30,6 @@ const Print = () => {
         setStartDate(formatDateFromBack(res.start_date));
         setEndDate(formatDateFromBack(res.end_date));
         setPrice(res.price);
-        setText(res.text);
         Get(res.client_id, "clients", 8081)
           .then(res => {
             setClient({

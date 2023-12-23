@@ -66,7 +66,7 @@ const Contract = () => {
     {id: 1, label: "Дата начала работы", type: "date", state: startDate, setState: setStartDate},
     {id: 2, label: "Дата окончания работы", type: "date", state: endDate, setState: setEndDate},
     {id: 3, label: "Стоимость", type: "number", state: price, setState: setPrice},
-    {id: 4, label: "Текст", type: "textarea", state: text, setState: setText}
+    {id: 4, label: "Комментарий", type: "textarea", state: text, setState: setText}
   ]
 
   const selects = [

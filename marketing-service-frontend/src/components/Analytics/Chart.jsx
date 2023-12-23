@@ -1,4 +1,5 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import PropTypes, {array} from "prop-types";
 
 const LineChartComponent = ({ analytics }) => {
   return (
@@ -46,5 +47,9 @@ const LineChartComponent = ({ analytics }) => {
     </div>
   );
 };
+
+LineChartComponent.propTypes = {
+  analytics: PropTypes.array
+}
 
 export default LineChartComponent;
