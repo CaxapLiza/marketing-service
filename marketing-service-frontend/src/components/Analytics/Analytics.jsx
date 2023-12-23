@@ -3,9 +3,10 @@ import {Delete, GetList, GetListById} from "../../api/api.js";
 import {useNavigate} from "react-router";
 import '../Items.css'
 import Select from "../../ui/form/Select.jsx";
+import Chart from "./Chart.jsx";
 
 const Analytics = () => {
-  const [analytics, setAnalytics] = useState([]); //
+  const [analytics, setAnalytics] = useState([]);
 
   const [project, setProject] = useState(0);
   const [projects, setProjects] = useState([]);
@@ -55,6 +56,7 @@ const Analytics = () => {
           <button onClick={() => handleDelete(analytic.id)}>Удалить</button>
         </div>
       ))}
+      {analytics && <Chart analytics={analytics} />}
     </div>
   );
 };

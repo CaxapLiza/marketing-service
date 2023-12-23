@@ -51,7 +51,9 @@ const Analytic = () => {
   }
 
   return (
-    <Form buttonText="Закрыть" inputs={inputs} func={handleBack} selects={selects}/>
+    <div>
+      <Form buttonText="Закрыть" inputs={inputs} func={handleBack} selects={selects}/>
+    </div>
   );
 };
 

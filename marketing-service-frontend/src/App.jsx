@@ -15,6 +15,7 @@ import Analytic from "./components/Analytics/Analytic.jsx";
 import Resources from "./components/Resources/Resources.jsx";
 import Resource from "./components/Resources/Resource.jsx";
 import NewResource from "./components/Resources/NewResource.jsx";
+import Print from "./components/Contracts/Print.jsx";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="services/new" element={<Service />}/>
           <Route path="contracts" element={<Contracts />}/>
           <Route path="contracts/:id" element={<Contract />}/>
+          <Route path="contracts/:id/print" element={<Print />}/>
           <Route path="contracts/new" element={<Contract />}/>
           <Route path="analytics" element={<Analytics />}/>
           <Route path="analytics/:id" element={<Analytic />}/>

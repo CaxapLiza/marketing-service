@@ -18,3 +18,16 @@
     width: fit-content;
     margin: 0 auto;
 }
+
+.space {
+    height: 1rem;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.print {
+    text-align: left;
+}

@@ -1,9 +1,11 @@
-import Form from "../../ui/form/Form.jsx";
 import {useEffect, useState} from "react";
-import {Create, Get, GetList, Update} from "../../api/api.js";
+import {Create, Delete, Get, GetList, GetListById, Update} from "../../api/api.js";
 import PropTypes from "prop-types";
 import {useNavigate, useParams} from "react-router";
 import {formatDateFromBack, formatDateFromFront} from "../../formatDate.js";
+import Input from "../../ui/form/Input.jsx";
+import Select from "../../ui/form/Select.jsx";
+import Button from "../../ui/Button.jsx";
 
 const Contract = () => {
   const { id } = useParams()
@@ -25,6 +27,23 @@ const Contract = () => {
   const [client, setClient] = useState(0);
 
   const [clients, setClients] = useState([]);
+
+  const [services, setServices] = useState([]);
+  const [allServices, setAllServices] = useState([]);
+  const [service, setService] = useState(0);
+
+  useEffect(() => {
+    GetListById(id, "contract_services", 8083)
+      .then(res => {
+        res && setServices(res)
+        res && res.length > 0 && setService(res[0]?.id)
+        console.log(res)
+      })
+      .catch(err => console.log(err));
+    GetList("services", 8086)
+      .then(res => setAllServices(res))
+      .catch(err => console.log(err));
+  }, [id])
 
   useEffect(() => {
     id && Get(id, "contracts", 8082)
@@ -81,13 +100,75 @@ const Contract = () => {
       client_id: parseInt(client)
     };
     Create(newData, "contracts", 8082)
-      .then()
+      .then(res => {
+        nav(`/contracts/${res}`);
+      })
       .catch(err => console.log(err));
-    nav("/contracts");
+  }
+
+  const handleDelete = (id) => {
+    Delete(id, "contract_services", 8083)
+      .then(() => {
+        GetListById(id, "contract_services", 8083)
+          .then(res => {
+            setServices(res)
+            res.length > 0 && setService(res[0]?.id)
+            console.log(res)
+          })
+          .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
+  }
+
+  const handleAdd = (sId) => {
+    Create({
+      contract_service_id: parseInt(id),
+      service_id: parseInt(sId)
+    }, "contract_services", 8083)
+      .then(() => {
+        GetListById(id, "contract_services", 8083)
+          .then(res => {
+            setServices(res)
+            res.length > 0 && setService(res[0]?.id)
+            console.log(res)
+          })
+          .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err))
+  }
+
+  const getName = (id) => {
+    const foundService = allServices.find(service => service.id === id);
+    return foundService?.description
   }
 
   return (
-    <Form buttonText="Сохранить" inputs={inputs} func={id ? handleUpdate : handleCreate} selects={selects}/>
+    <form>
+      {inputs.map(input => (
+        <Input key={input.id} setState={input.setState} label={input.label} type={input.type} state={input.state} />
+      ))}
+      {selects.map(select => (
+        <Select key={select.id} options={select.options} title={select.title}
+                selectedValue={select.selectedValue} setSelectedValue={select.setSelectedValue} />
+      ))}
+      <Button text="Генерация печатной версии" func={() => {nav(`/contracts/${id}/print`)}} />
+      <div className="space" />
+      {id && <div className="item">
+        <Select key={service} options={allServices} title="Услуга"
+                selectedValue={service} setSelectedValue={setService} />
+        <div></div>
+        <Button text={"Добавить"} func={() => handleAdd(service)}/>
+      </div>}
+      {id && services.map(service => (
+        <div key={service.id} className="item">
+          <div>{getName(service.service_id)}</div>
+          <div></div>
+          <button onClick={() => handleDelete(service.id)}>Удалить</button>
+        </div>
+      ))}
+      <div className="space" />
+      <Button text={"Сохранить"} func={id ? handleUpdate : handleCreate}/>
+    </form>
   );
 };
 
